@@ -1,0 +1,58 @@
+{
+  "name": "Classroom",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "year_group": {
+      "type": "string"
+    },
+    "school_id": {
+      "type": "string"
+    },
+    "school_name": {
+      "type": "string"
+    },
+    "join_code": {
+      "type": "string"
+    },
+    "teacher_name": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "join_code"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

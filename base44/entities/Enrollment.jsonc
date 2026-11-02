@@ -1,0 +1,53 @@
+{
+  "name": "Enrollment",
+  "type": "object",
+  "properties": {
+    "classroom_id": {
+      "type": "string"
+    },
+    "classroom_name": {
+      "type": "string"
+    },
+    "school_id": {
+      "type": "string"
+    },
+    "student_name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "invited",
+        "active"
+      ],
+      "default": "active"
+    }
+  },
+  "required": [
+    "classroom_id"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "created_by_id": "{{user.id}}"
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

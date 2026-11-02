@@ -1,0 +1,77 @@
+{
+  "name": "Homework",
+  "type": "object",
+  "properties": {
+    "classroom_id": {
+      "type": "string"
+    },
+    "classroom_name": {
+      "type": "string"
+    },
+    "school_id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "homework",
+        "assessment"
+      ],
+      "default": "homework"
+    },
+    "topic_id": {
+      "type": "string"
+    },
+    "topic_name": {
+      "type": "string"
+    },
+    "question_count": {
+      "type": "number",
+      "default": 10
+    },
+    "due_date": {
+      "type": "string"
+    },
+    "teacher_name": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "classroom_id",
+    "topic_id",
+    "question_count"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

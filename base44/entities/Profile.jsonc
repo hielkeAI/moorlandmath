@@ -1,0 +1,75 @@
+{
+  "name": "Profile",
+  "type": "object",
+  "properties": {
+    "display_name": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "student",
+        "teacher"
+      ],
+      "default": "student"
+    },
+    "school_id": {
+      "type": "string"
+    },
+    "school_name": {
+      "type": "string"
+    },
+    "classroom_id": {
+      "type": "string"
+    },
+    "classroom_name": {
+      "type": "string"
+    },
+    "year_group": {
+      "type": "string"
+    },
+    "xp": {
+      "type": "number",
+      "default": 0
+    },
+    "total_answered": {
+      "type": "number",
+      "default": 0
+    },
+    "total_correct": {
+      "type": "number",
+      "default": 0
+    },
+    "streak": {
+      "type": "number",
+      "default": 0
+    },
+    "last_active_date": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "role"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "created_by_id": "{{user.id}}"
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

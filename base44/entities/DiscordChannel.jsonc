@@ -1,0 +1,33 @@
+{
+  "name": "DiscordChannel",
+  "type": "object",
+  "properties": {
+    "classroom_id": {
+      "type": "string"
+    },
+    "classroom_name": {
+      "type": "string"
+    },
+    "webhook_url": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "classroom_id",
+    "webhook_url"
+  ],
+  "rls": {
+    "read": {
+      "created_by_id": "{{user.id}}"
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "created_by_id": "{{user.id}}"
+    },
+    "delete": {
+      "created_by_id": "{{user.id}}"
+    }
+  }
+}
